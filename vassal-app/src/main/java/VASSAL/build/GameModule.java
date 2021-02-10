@@ -1772,6 +1772,10 @@ public class GameModule extends AbstractConfigurable
     return theState;
   }
 
+  public void setGameState(GameState gs) {
+     theState = gs;
+  }
+
   /**
    * If the module is being edited, write the module data after prompting for a new filename.
    */

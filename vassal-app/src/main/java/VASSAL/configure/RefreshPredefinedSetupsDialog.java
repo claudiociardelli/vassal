@@ -19,6 +19,7 @@ package VASSAL.configure;
 
 import VASSAL.build.GameModule;
 import VASSAL.build.module.Documentation;
+import VASSAL.build.module.GameState;
 import VASSAL.build.module.PredefinedSetup;
 import VASSAL.build.module.documentation.HelpFile;
 import VASSAL.i18n.Resources;
@@ -129,6 +130,7 @@ public class RefreshPredefinedSetupsDialog extends JDialog {
   }
 
   private void refreshPredefinedSetups() {
+    GameState gs;
     refreshButton.setEnabled(false);
     setOptions();
     if (isTestMode()) {
@@ -153,7 +155,9 @@ public class RefreshPredefinedSetupsDialog extends JDialog {
     }
     for (final PredefinedSetup pds : modulePds) {
       try {
+        gs = mod.getGameState();
         pds.refresh(options);
+        mod.setGameState(gs);
       }
       catch (final IOException e) {
         ErrorDialog.bug(e);
